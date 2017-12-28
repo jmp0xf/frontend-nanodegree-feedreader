@@ -98,15 +98,35 @@ $(function() {
         });
     });
 
-    /* TODO: 13. 写一个叫做 "Initial Entries" 的测试用例 */
+    /* 写一个叫做 "Initial Entries" 的测试用例 */
+    describe('Initial Entries', function () {
+        var container = $(".feed");
+        var feeds = $(".feed-list a");
+        var containerCopy = container.clone();
 
-        /* TODO:
+        beforeEach(function (done) {
+            // 随机选择一个 id
+            var randomIndex = Math.floor(Math.random() * feeds.length);
+            loadFeed($(feeds[randomIndex]).data("id"), done);
+        });
+
+        // 还原 container
+        afterAll(function () {
+            container.html(containerCopy.html());
+        });
+
+        /*
          * 写一个测试保证 loadFeed 函数被调用而且工作正常，即在 .feed 容器元素
          * 里面至少有一个 .entry 的元素。
          *
          * 记住 loadFeed() 函数是异步的所以这个而是应该使用 Jasmine 的 beforeEach
          * 和异步的 done() 函数。
          */
+        it('first loadfeed add feed(s) to container', function (done) {
+            expect(container.find(".entry").length).toBeGreaterThan(0);
+            done();
+        });
+    });
 
     /* TODO: 写一个叫做 "New Feed Selection" 的测试用例 */
 
