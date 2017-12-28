@@ -128,10 +128,43 @@ $(function() {
         });
     });
 
-    /* TODO: 写一个叫做 "New Feed Selection" 的测试用例 */
+    /* 写一个叫做 "New Feed Selection" 的测试用例 */
+    describe('New Feed Selection', function () {
+        var container = $(".feed");
+        var feeds = $(".feed-list a");
+        var containerCopy = container.clone();
+        var lastContent;
+        var lastFeedID = NaN;
 
-        /* TODO:
+        beforeEach(function (done) {
+            // 随机选择一个跟上次选择不一样的 id
+            var randomIndex, feedID;
+            do {
+                randomIndex = Math.floor(Math.random() * feeds.length);
+                feedID = $(feeds[randomIndex]).data("id");
+            } while (feedID==lastFeedID);
+            lastFeedID = feedID;
+            lastContent = container.html();
+            loadFeed(feedID, done);
+        });
+
+        // 还原 container
+        afterAll(function () {
+            container.html(containerCopy.html());
+        });
+
+        /*
          * 写一个测试保证当用 loadFeed 函数加载一个新源的时候内容会真的改变。
          * 记住，loadFeed() 函数是异步的。
          */
+        it('first loadfeed changes feeds content', function (done) {
+            expect(container.html()).not.toBe(lastContent);
+            done();
+        });
+
+        it('second loadfeed changes feeds content', function (done) {
+            expect(container.html()).not.toBe(lastContent);
+            done();
+        });
+    });
 }());
