@@ -23,7 +23,7 @@
 查看订阅阅读器项目的[评审标准](https://review.udacity.com/#!/projects/3442558598/rubric)
 
 1. 上一下 javascript Testing [课程](https://www.udacity.com/course/ud549)
-2. 下载[必要的项目资源](http://github.com/udacity/frontend-nanodegree-feedreader))
+2. 下载[必要的项目资源](http://github.com/udacity/frontend-nanodegree-feedreader)
 3. 在浏览器里面查看一下应用的功能
 4. 查看项目的 HTMl (**./index.html**), CSS (**./css/style.css**) 和 JavaScript (**./js/app.js**) 文件来对项目的工作原理有一个基本的了解。
 5. 查看 Jasmine spec 文件 **./jasmine/spec/feedreader.js** 然后翻阅阅读 [Jasmine 文档](http://jasmine.github.io)。
