@@ -46,18 +46,57 @@ $(function() {
     });
 
 
-    /* TODO: 写一个叫做 "The menu" 的测试用例 */
+    /* 菜单功能的测试用例 */
+    describe('Menu', function () {
 
-        /* TODO:
+        var body = $("body");
+        var menu = $(".slide-menu");
+        var menuToggle = $("a.menu-icon-link");
+
+        /*
          * 写一个测试用例保证菜单元素默认是隐藏的。你需要分析 html 和 css
          * 来搞清楚我们是怎么实现隐藏/展示菜单元素的。
          */
+        it('menu is hidden by default', function () {
+            expect(body.attr("class")).toContain("menu-hidden");
+            // 菜单向左位移必须大于菜单显示宽度才能保证隐藏
+            expect(menu.offset().left + menu.outerWidth()).not.toBeGreaterThan(0);
+        });
 
-         /* TODO:
-          * 写一个测试用例保证当菜单图标被点击的时候菜单会切换可见状态。这个
-          * 测试应该包含两个 expectation ： 党点击图标的时候菜单是否显示，
-          * 再次点击的时候是否隐藏。
-          */
+        /*
+        * 写一个测试用例保证当菜单图标被点击的时候菜单会切换可见状态。这个
+        * 测试应该包含两个 expectation ： 当点击图标的时候菜单是否显示，
+        * 再次点击的时候是否隐藏。
+        */
+        describe('Menu Toggle', function() {
+            beforeEach(function (done) {
+                menu.bind("transitionend", function () {
+                    done();
+                });
+                menuToggle.click();
+            });
+
+            afterEach(function () {
+                menu.unbind("transitionend");
+            });
+
+            // 第一次点击显示菜单
+            it('menu is shown by first click', function (done) {
+                expect(body.attr("class")).not.toContain("menu-hidden");
+                // 菜单回到原处则显示
+                expect(menu.offset().left).toBe(0);
+                done();
+            });
+
+            // 再次点击隐藏菜单
+            it('menu is hidden by second click', function (done) {
+                expect(body.attr("class")).toContain("menu-hidden");
+                // 菜单向左位移必须大于菜单显示宽度才能保证隐藏
+                expect(menu.offset().left + menu.outerWidth()).not.toBeGreaterThan(0);
+                done();
+            });
+        });
+    });
 
     /* TODO: 13. 写一个叫做 "Initial Entries" 的测试用例 */
 
