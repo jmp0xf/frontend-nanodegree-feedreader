@@ -24,16 +24,27 @@ $(function() {
             expect(allFeeds.length).not.toBe(0);
         });
 
+        function expectAllFeedsToSatisfy(predicate) {
+            allFeeds.forEach(function (feed) {
+                predicate(feed);
+            });
+        }
+
+        function expectAllFeedsNotToBeEmpty(attr) {
+            expectAllFeedsToSatisfy(function (feed) {
+                expect(feed[attr]).toBeDefined();
+                expect(feed[attr].length).toBeDefined();
+                expect(feed[attr].length).not.toBe(0);
+            });
+        }
 
         /*
          * 编写一个测试遍历 allFeeds 对象里面的所有的源来保证有链接字段而且链接不是空的。
          */
         it('url is defined properly', function() {
-            allFeeds.forEach(function (feed) {
-                expect(feed.url).toBeDefined();
-                expect(feed.url.length).toBeDefined();
-                expect(feed.url.length).not.toBe(0);
-                // 检查 URL 格式是否正确
+            expectAllFeedsNotToBeEmpty("url");
+            // 检查 URL 格式是否正确
+            expectAllFeedsToSatisfy(function (feed) {
                 expect(feed.url).toMatch(regularExpressionUrl);
             });
         });
@@ -42,11 +53,7 @@ $(function() {
          * 编写一个测试遍历 allFeeds 对象里面的所有的源来保证有名字字段而且不是空的。
          */
         it('name is defined', function() {
-            allFeeds.forEach(function (feed) {
-                expect(feed.name).toBeDefined();
-                expect(feed.name.length).toBeDefined();
-                expect(feed.name.length).not.toBe(0);
-            });
+            expectAllFeedsNotToBeEmpty("name");
         });
     });
 
