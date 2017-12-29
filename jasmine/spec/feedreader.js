@@ -93,19 +93,17 @@ $(function() {
             });
 
             // 第一次点击显示菜单
-            it('menu is shown by first click', function (done) {
+            it('menu is shown by first click', function () {
                 expect(body.hasClass("menu-hidden")).toBeFalsy();
                 // 菜单回到原处则显示
                 expect(menu.offset().left).toBe(0);
-                done();
             });
 
             // 再次点击隐藏菜单
-            it('menu is hidden by second click', function (done) {
+            it('menu is hidden by second click', function () {
                 expect(body.hasClass("menu-hidden")).toBeTruthy();
                 // 菜单向左位移必须大于菜单显示宽度才能保证隐藏
                 expect(menu.offset().left + menu.outerWidth()).not.toBeGreaterThan(0);
-                done();
             });
         });
     });
@@ -134,9 +132,8 @@ $(function() {
          * 记住 loadFeed() 函数是异步的所以这个而是应该使用 Jasmine 的 beforeEach
          * 和异步的 done() 函数。
          */
-        it('first loadfeed add feed(s) to container', function (done) {
+        it('first loadfeed add feed(s) to container', function () {
             expect(container.find(".entry").length).toBeGreaterThan(0);
-            done();
         });
     });
 
@@ -169,14 +166,12 @@ $(function() {
          * 写一个测试保证当用 loadFeed 函数加载一个新源的时候内容会真的改变。
          * 记住，loadFeed() 函数是异步的。
          */
-        it('first loadfeed changes feeds content', function (done) {
+        it('first loadfeed changes feeds content', function () {
             expect(container.html()).not.toBe(lastContent);
-            done();
         });
 
-        it('second loadfeed changes feeds content', function (done) {
+        it('second loadfeed changes feeds content', function () {
             expect(container.html()).not.toBe(lastContent);
-            done();
         });
     });
 }());
