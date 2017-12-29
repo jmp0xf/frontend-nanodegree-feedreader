@@ -70,7 +70,7 @@ $(function() {
          * 来搞清楚我们是怎么实现隐藏/展示菜单元素的。
          */
         it('menu is hidden by default', function () {
-            expect(body.attr("class")).toContain("menu-hidden");
+            expect(body.hasClass("menu-hidden")).toBeTruthy();
             // 菜单向左位移必须大于菜单显示宽度才能保证隐藏
             expect(menu.offset().left + menu.outerWidth()).not.toBeGreaterThan(0);
         });
@@ -94,7 +94,7 @@ $(function() {
 
             // 第一次点击显示菜单
             it('menu is shown by first click', function (done) {
-                expect(body.attr("class")).not.toContain("menu-hidden");
+                expect(body.hasClass("menu-hidden")).toBeFalsy();
                 // 菜单回到原处则显示
                 expect(menu.offset().left).toBe(0);
                 done();
@@ -102,7 +102,7 @@ $(function() {
 
             // 再次点击隐藏菜单
             it('menu is hidden by second click', function (done) {
-                expect(body.attr("class")).toContain("menu-hidden");
+                expect(body.hasClass("menu-hidden")).toBeTruthy();
                 // 菜单向左位移必须大于菜单显示宽度才能保证隐藏
                 expect(menu.offset().left + menu.outerWidth()).not.toBeGreaterThan(0);
                 done();
