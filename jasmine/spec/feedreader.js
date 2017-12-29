@@ -69,7 +69,7 @@ $(function() {
          * 写一个测试用例保证菜单元素默认是隐藏的。你需要分析 html 和 css
          * 来搞清楚我们是怎么实现隐藏/展示菜单元素的。
          */
-        it('menu is hidden by default', function () {
+        it('is hidden by default', function () {
             expect(body.hasClass("menu-hidden")).toBeTruthy();
             // 菜单向左位移必须大于菜单显示宽度才能保证隐藏
             expect(menu.offset().left + menu.outerWidth()).not.toBeGreaterThan(0);
@@ -93,14 +93,14 @@ $(function() {
             });
 
             // 第一次点击显示菜单
-            it('menu is shown by first click', function () {
+            it('show menu by first click', function () {
                 expect(body.hasClass("menu-hidden")).toBeFalsy();
                 // 菜单回到原处则显示
                 expect(menu.offset().left).toBe(0);
             });
 
             // 再次点击隐藏菜单
-            it('menu is hidden by second click', function () {
+            it('hide menu by second click', function () {
                 expect(body.hasClass("menu-hidden")).toBeTruthy();
                 // 菜单向左位移必须大于菜单显示宽度才能保证隐藏
                 expect(menu.offset().left + menu.outerWidth()).not.toBeGreaterThan(0);
@@ -132,7 +132,7 @@ $(function() {
          * 记住 loadFeed() 函数是异步的所以这个而是应该使用 Jasmine 的 beforeEach
          * 和异步的 done() 函数。
          */
-        it('first loadfeed add feed(s) to container', function () {
+        it('loadfeed add feed(s) to container', function () {
             expect(container.find(".entry").length).toBeGreaterThan(0);
         });
     });
